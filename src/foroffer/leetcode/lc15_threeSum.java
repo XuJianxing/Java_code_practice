@@ -17,9 +17,12 @@ class Solution15 {
     /**
      * 方法：排序 + 双指针
      * 因为不能重复，所以不能简单遍历
+     * 排好序后，依次枚举a，在循环a时，对b c使用双指针查找目标值：
+     * b右移一格，c从右向左一直移动到满足条件或一直不满足结束bc的双指针，进入a的下一个循环
      */
     public List<List<Integer>> threeSum(int[] nums) {
         int n = nums.length;
+        // 1. 排序
         Arrays.sort(nums);
         List<List<Integer>> ans = new ArrayList<>();
         // 枚举 a
