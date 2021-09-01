@@ -14,18 +14,28 @@ package foroffer.leetcode;
  * 输出：[1,2,3]
  */
 public class lc31_nextPermutation {
+    /**
+     * 也就是n个数的排列问题，两个数之间的区别就是两个位置的交换问题
+     * 所以做法也就是找到两个满足条件的数的位置并交换
+     * https://leetcode-cn.com/problems/next-permutation/solution/xia-yi-ge-pai-lie-suan-fa-xiang-jie-si-lu-tui-dao-/
+     */
     public void nextPermutation(int[] nums) {
         int i = nums.length - 2;
+        // 只考虑长度大于1
+        // 且从后向前查找第一个相邻升序的位置i
         while (i >= 0 && nums[i] >= nums[i + 1]) {
             i--;
         }
         if (i >= 0) {
             int j = nums.length - 1;
+            // 从后向前找第一个满足A[i] < A[j]的数
             while (j >= 0 && nums[i] >= nums[j]) {
                 j--;
             }
+            // 交换两个数
             swap(nums, i, j);
         }
+        // 因为i和i+1是第一个升序对，所以i+1到end肯定是降序，把后面的升序使得满足增量最小
         reverse(nums, i + 1);
     }
 
