@@ -6,7 +6,7 @@ import java.util.HashMap;
  * 剑指offer 7. 重建二叉树
  * 给二叉树的前序遍历和中序遍历序列，重建该二叉树返回根节点
  */
-public class ReConstructBinaryTree {
+public class _7_ReConstructBinaryTree {
     private HashMap<Integer, Integer> indexForInOrders = new HashMap<>();
 
     public TreeNode buildTree(int[] pre, int[] in) {
