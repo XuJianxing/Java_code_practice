@@ -3,7 +3,7 @@ package foroffer.offer;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class PrintListFromTailToHead {
+public class _6PrintListFromTailToHead {
     public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
         Stack<Integer> stack = new Stack<>();
         ArrayList<Integer> newlist = new ArrayList<>();
