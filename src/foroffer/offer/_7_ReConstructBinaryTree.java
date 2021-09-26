@@ -26,4 +26,40 @@ public class _7_ReConstructBinaryTree {
         return root;
     }
 
+    /**
+     * 没用map存中序每个节点下标的做法
+     */
+    public TreeNode reConstructBinaryTree(int[] pre, int[] in) {
+        int preLength = pre.length;
+        int inLength = in.length;
+
+        return reConstructCore(pre, in, 0, preLength-1, 0, inLength-1);
+    }
+
+    /**
+     * 没用map存中序每个节点下标的做法
+     */
+    public TreeNode reConstructCore(int[] pre, int[] in,
+                                           int preStart, int preEnd,
+                                           int inStart, int inEnd) {
+
+        int rootValue = pre[preStart]; // 前序遍历的第一个是根节点
+        TreeNode r = new TreeNode(rootValue);
+        // 在中序遍历中找到他的根节点所在的位置，用它来划分节点簇
+        int inRootIdx = inStart;
+        while (inRootIdx < inEnd && in[inRootIdx] != rootValue)
+            inRootIdx++;
+
+        // 左右子树的长度为
+        int leftLength = inRootIdx - inStart;
+        int rightLength = inEnd - inRootIdx;
+        if(leftLength > 0)
+            r.left = reConstructCore(pre, in, preStart+1, preStart+leftLength, inStart, inRootIdx-1);
+
+        if(rightLength > 0)
+            r.right = reConstructCore(pre, in, preStart+leftLength+1, preEnd, inRootIdx+1, inEnd);
+
+        return r;
+
+    }
 }
