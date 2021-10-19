@@ -1,5 +1,8 @@
 package foroffer.offer;
 
+/**
+ * offer 17. 打印从1到最大的n位数
+ */
 public class _17_print1ToMaxOfNDigits {
     public void print1ToMaxOfNDigits(int n){
         if (n <= 0) return;
