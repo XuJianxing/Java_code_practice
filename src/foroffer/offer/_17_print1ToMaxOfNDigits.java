@@ -2,6 +2,8 @@ package foroffer.offer;
 
 /**
  * offer 17. 打印从1到最大的n位数
+ * 思路很直接：可以把一个函数拆分为三个函数各自做自己的事
+ * 1. main；2. increment给数组加一并返回是否达到边界；3. 打印数组数字
  */
 public class _17_print1ToMaxOfNDigits {
     public void print1ToMaxOfNDigits(int n){
