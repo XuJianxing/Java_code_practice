@@ -1,4 +1,4 @@
-package foroffer.offer;
+package foroffer.leetcode;
 
 /**
  * 41. 缺失的第一个正数
