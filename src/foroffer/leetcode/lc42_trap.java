@@ -21,7 +21,7 @@ class Solution42 {
         while (left < right) {
             leftMax = Math.max(leftMax, height[left]);
             rightMax = Math.max(rightMax, height[right]);
-            if (height[left] < height[right]) {
+            if (leftMax < rightMax) {
                 ans += leftMax - height[left];
                 ++left;
             } else {
