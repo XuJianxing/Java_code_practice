@@ -7,12 +7,12 @@ package foroffer.offer;
 import java.util.ArrayList;
 
 public class _34FindPath {
+    private ArrayList<ArrayList<Integer>> resultPath = new ArrayList<>();
     public ArrayList<ArrayList<Integer>> FindPath(TreeNode root,int target) {
         if (root == null) return resultPath;
         findPath(root, target, new ArrayList<>());
         return resultPath;
     }
-    private ArrayList<ArrayList<Integer>> resultPath = new ArrayList();
     private void findPath(TreeNode root, int target, ArrayList<Integer> path){
         if (root == null) return;
         target -= root.val;
