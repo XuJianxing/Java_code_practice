@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class _34FindPath {
     private ArrayList<ArrayList<Integer>> resultPath = new ArrayList<>();
     public ArrayList<ArrayList<Integer>> FindPath(TreeNode root,int target) {
-        if (root == null) return resultPath;
         findPath(root, target, new ArrayList<>());
         return resultPath;
     }
@@ -20,10 +19,8 @@ public class _34FindPath {
         // 如果是叶节点，且和等于target
         if (0 == target && root.left == null && root.right == null)
             resultPath.add(new ArrayList<>(path)); // 很关键，把新建的path放进去。现在的path是用来判断的
-        if (root.left != null)
-            findPath(root.left, target, path);
-        if (root.right != null)
-            findPath(root.right, target, path);
+        findPath(root.left, target, path);
+        findPath(root.right, target, path);
         path.remove(path.size()-1);
     }
 }
