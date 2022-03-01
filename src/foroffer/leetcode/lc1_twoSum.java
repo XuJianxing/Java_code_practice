@@ -4,10 +4,8 @@ package foroffer.leetcode;
 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，
 并返回他们的数组下标。
  */
-public class lc1_twoSum {
-}
 
-class solution1 {
+public class lc1_twoSum {
     public int[] twoSum(int[] nums, int target) {
         int i=0,j=1;
         for (i=0;i<nums.length;i++){
