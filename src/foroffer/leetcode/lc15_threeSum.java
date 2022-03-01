@@ -10,10 +10,8 @@ import java.util.List;
  * 请你找出所有和为 0 且不重复的三元组。
  * 注意：答案中不可以包含重复的三元组。
  */
-public class lc15_threeSum {
-}
 
-class Solution15 {
+public class lc15_threeSum {
     /**
      * 方法：排序 + 双指针
      * 因为不能重复，所以不能简单遍历
