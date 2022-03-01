@@ -13,10 +13,8 @@ import java.util.Set;
  * （一个节点也可以是它自己的祖先）。”
  *
  */
-public class lc236_lowestCommonAncestor {
-}
 
-class Solution236 {
+public class lc236_lowestCommonAncestor {
     /**
      * 法1 深度遍历，遍历的时候记录有没有找到过p或q，如果找到了就一直返回找到了，然后在方法体中间一直判断概念定义条件
      */
