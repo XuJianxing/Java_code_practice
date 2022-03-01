@@ -8,10 +8,8 @@ package foroffer.leetcode;
  *
  * 此外，你可以假设该网格的四条边均被水包围。
  */
-public class lc200_numIslands {
-}
 
-class Solution200 {
+public class lc200_numIslands {
     void dfs(char[][] grid, int r, int c) {
         int nr = grid.length;
         int nc = grid[0].length;
