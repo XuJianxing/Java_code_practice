@@ -8,10 +8,8 @@ package foroffer.leetcode;
  *
  * 返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。
  */
-public class lc121_maxProfit {
-}
 
-class solution121{
+public class lc121_maxProfit {
     /**
      * 思路：每天考虑一次，如果今天卖出，那么之前哪天买进才能最大利润？
      */
