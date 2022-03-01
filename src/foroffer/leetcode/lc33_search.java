@@ -12,10 +12,8 @@ package foroffer.leetcode;
  * 输入：nums = [4,5,6,7,0,1,2], target = 0
  * 输出：4
  */
-public class lc33_search {
-}
 
-class Solution33 {
+public class lc33_search {
     /**
      * 可以遍历，也可以二分查找，二分更快
      */
