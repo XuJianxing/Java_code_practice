@@ -18,10 +18,8 @@ import java.util.Queue;
  *   [15,7]
  * ]
  */
-public class lc103_zigzagLevelOrder {
-}
 
-class Solution103 {
+public class lc103_zigzagLevelOrder {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> ans = new LinkedList<>();
         if (root == null) return ans;
