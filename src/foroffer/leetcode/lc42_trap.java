@@ -6,10 +6,8 @@ package foroffer.leetcode;
  * 输入：height = [0,1,0,2,1,0,1,3,2,1,2,1]
  * 输出：6
  */
-public class lc42_trap {
-}
 
-class Solution42 {
+public class lc42_trap {
     /**
      * 双指针
      * 仔细分析问题后得到的数学规律：当前坐标的蓄水量是这个位置的左边极大值和右边极大值中较小的值拦住的
