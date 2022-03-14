@@ -41,49 +41,103 @@ public class lc5_longestPalindrome {
         return null;
     }
     /**
+     * 3. 自己写的中心扩展法，一个返回int，一个返回String
+     */
+    public static int longestPalindrome_3(String str){
+        if (str == null || str.length() <= 0)
+            return 0;
+        int maxLength = 0;
+        for (int i = 0; i < str.length(); i++){
+            int length1 = findPalindrome(str, i, i);
+            int length2 = findPalindrome(str, i, i + 1);
+            maxLength = Math.max(Math.max(length1, length2), maxLength);
+        }
+        return maxLength;
+    }
+    public String longestPalindrome_4(String str){
+        String s = "";
+        if (str == null || str.length() <= 0)
+            return s;
+        int maxLength = 0;
+        int maxForNow = 0;
+        for (int i = 0; i < str.length(); i++){
+            int length1 = findPalindrome(str, i, i);
+            int length2 = findPalindrome(str, i, i + 1);
+            maxForNow = Math.max(length1, length2);
+            if (maxForNow > maxLength){
+                maxLength = maxForNow;
+                if ((maxForNow & 1) == 0)
+                    s = str.substring(i - maxLength / 2 + 1, i + maxLength / 2 + 1);
+                else
+                    s = str.substring(i - maxLength / 2, i + maxLength / 2 + 1);
+            }
+        }
+        return s;
+    }
+    private static int findPalindrome(String s, int begin, int end){
+        while(begin >= 0 && end < s.length()){
+            if (s.charAt(begin) == s.charAt(end)){
+                begin--;
+                end++;
+            }
+            else break;
+        }
+        return end - begin - 1;
+    }
+    /**
      * Manacher算法（马拉车）————O(n)回文子串
      * https://www.cnblogs.com/fan1-happy/p/11166182.html
      * 这里是返回长度
      */
-    public int longestPalindrome_3(String s) {
-        char[] s_new = init(s);  // 组成新字符串
-        int max_len = -1;  // 最长回文长度
-        int id = 0;
-        int mx = 0;
-        int[] p = new int[s_new.length];
-        for(int i = 1; i < s_new.length; i++) {
-            if(i < mx)
-                p[i] = Math.min(p[2 * id - i],mx - i);//上面图片就是这里的讲解
-            else p[i] = 1;
-            // *** Java代码这里要改一下，因为s_new[i + p[i]]到最后数组越界了 ***
-            while(s_new[i - p[i]] == s_new[i + p[i]])//不需边界判断，因为左有'$'，右有'\0'标记；
-                p[i]++;//mx对此回文中点的贡献已经结束，现在是正常寻找扩大半径
-            if(mx < i + p[i]) {//每走移动一个回文中点，都要和mx比较，使mx是最大，提高p[i]=min(p[2*id-i],mx-i)效率
-                id = i;//更新id
-                mx = i + p[i];//更新mx
+    public static int longestPalindrome_5(String str) {
+        // 1.构造新的字符串
+        // 为了避免奇数回文和偶数回文的不同处理问题，在原字符串中插入'#'，将所有回文变成奇数回文
+        StringBuilder newStr = new StringBuilder();
+        newStr.append('#');
+        for (int i = 0; i < str.length(); i ++) {
+            newStr.append(str.charAt(i));
+            newStr.append('#');
+        }
+
+        // rad[i]表示以i为中心的回文的最大半径，i至少为1，即该字符本身
+        int [] rad = new int[newStr.length()];
+        // right表示已知的回文中，最右的边界的坐标
+        int right = -1;
+        // id表示已知的回文中，拥有最右边界的回文的中点坐标
+        int id = -1;
+        // 2.计算所有的rad
+        // 这个算法是O(n)的，因为right只会随着里层while的迭代而增长，不会减少。
+        for (int i = 0; i < newStr.length(); i ++) {
+            // 2.1.确定一个最小的半径
+            int r = 1;
+            if (i <= right) {
+                r = Math.min(rad[id] - i + id, rad[2 * id - i]);
             }
-            max_len = Math.max(max_len, p[i] - 1);
+            // 2.2.尝试更大的半径
+            while (i - r >= 0 && i + r < newStr.length() && newStr.charAt(i - r) == newStr.charAt(i + r)) {
+                r++;
+            }
+            // 2.3.更新边界和回文中心坐标
+            if (i + r - 1> right) {
+                right = i + r - 1;
+                id = i;
+            }
+            rad[i] = r;
         }
-        return max_len;
-    }
-    private char[] init(String s){
-        char[] t = new char[s.length() * 2 + 3];
-        if (s.length() < 1) return t;
-        t[0] = '$';
-        t[1] = '#';
-        int j = 2;
-        for (int i = 0; i < s.length(); i++) {
-            t[j++] = s.charAt(i);
-            t[j++] = '#';
+
+        // 3.扫描一遍rad数组，找出最大的半径
+        int maxLength = 0;
+        for (int r : rad) {
+            if (r > maxLength) {
+                maxLength = r;
+            }
         }
-        t[j] = '#';
-        System.out.println(t);
-        return t;
+        return maxLength - 1;
     }
     /**
      * 力扣 示例代码
      */
-    public String longestPalindrome_4(String s) {
+    public String longestPalindrome_6(String s) {
         int start = 0, end = -1;
         StringBuilder t = new StringBuilder("#");
         for (int i = 0; i < s.length(); ++i) {
@@ -123,7 +177,6 @@ public class lc5_longestPalindrome {
         }
         return ans.toString();
     }
-
     public int expand(String s, int left, int right) {
         while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
             --left;
@@ -137,7 +190,11 @@ public class lc5_longestPalindrome {
         String s = "aacbbabbcdd";
         System.out.println(test.longestPalindrome(s));
         System.out.println(test.longestPalindrome_2(s));
-        System.out.println(test.longestPalindrome_4(s));
         System.out.println(test.longestPalindrome_3(s));
+        System.out.println(test.longestPalindrome_4(s));
+        System.out.println("----------");
+        System.out.println(test.longestPalindrome_5(s));
+        System.out.println(test.longestPalindrome_6(s));
     }
+
 }
