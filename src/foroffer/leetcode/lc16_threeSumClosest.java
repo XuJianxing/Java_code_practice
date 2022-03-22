@@ -2,6 +2,10 @@ package foroffer.leetcode;
 
 import java.util.Arrays;
 
+/**
+ * 最接近的三数之和
+ */
+
 public class lc16_threeSumClosest {
     public int threeSumClosest(int[] nums, int target) {
         Arrays.sort(nums);
